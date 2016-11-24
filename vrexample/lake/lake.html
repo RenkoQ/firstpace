@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>sky</title>
+    <script src="aframe.min.js"></script>
+</head>
+<body>
+
+<a-scene>
+    <a-assets>
+        <img id="lake" src="lake.jpg">
+    </a-assets>
+    <!-- 球面 -->
+    <a-sphere position="0 1.25 -1" radius="1.25" color="#ef2d5e">
+        <a-animation attribute="scale" from="1 1 1" to="1.2 1.2 1.2" dur="2000" repeat="indefinite" direction="alternate"></a-animation>
+    </a-sphere>
+    <!-- 盒子 -->
+    <a-box cursor-listener position="-1 0.5 1" rotation="0 45 0" width="1" height="1" depath="1" color="#4cc3d9">
+        <a-animation attribute="rotation" from="0 45 0" to="0 360 0" repeat="indefinite" direction="alternate"></a-animation>
+    </a-box>
+    <!-- 圆柱 -->
+    <a-cylinder position="1 0.75 1" radius="0.5" height="1.5" color="#ffc65d">
+        <a-animation attribute="height" from="1.5" to="0" repeat="indefinite" direction="alternate"></a-animation>
+    </a-cylinder>
+    <!-- 平面 -->
+    <a-plane position="0 0 0" rotation="-90 0 0" width="4" height="4" color="#7bc8a4"></a-plane>
+
+    <a-sky src="#lake"></a-sky>
+    <a-entity position="0 0 3.8">
+        <a-camera>
+            <!-- 创建光标 -->
+            <a-cursor color="#000"></a-cursor>
+        </a-camera>
+    </a-entity>
+</a-scene>
+
+<script>
+    AFRAME.registerComponent("cursor-listener", {
+        init: function() {
+            var COLORS = ["#6c8cbf", "#e4f0ff", "#6c70e1"];
+            this.el.addEventListener("click", function() {
+                var randomIndex = Math.floor(Math.random() * COLORS.length);
+                this.setAttribute("color", COLORS[randomIndex]);
+            });
+        }
+    });
+</script>
+</body>
+</html>
